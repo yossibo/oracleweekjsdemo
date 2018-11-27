@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+
+        /*
+        JavaScript has offered reflection for a long time now, with operators such as typeof and instanceof:
+    
+    typeof is used to know the type of an unevaluated value, which can be a primitive or an object (note that functions and arrays are also objects).
+    instanceof is used to know if the prototype of a constructor is in an object's prototype chain. This requires the instanceof operator to evaluate properties from both objects.
+    Let’s take a look at instanceof:
+    */
+        // Definition of Fruit
+        function Fruit() {
+            this.isFood = true;
+        };
+        // Definition of Banana using old-style inheritance
+        function Banana() {
+            this.name = 'Banana';
+        }
+        Banana.prototype = Object.create(Fruit.prototype);
+        // High level inspections
+        const banana = new Banana();
+        console.log(banana instanceof Banana); // true, Banana is a Fruit
+        console.log(banana instanceof Fruit); // true, Fruit is an Object
+        console.log(banana instanceof Object); // true
+
+
+
+        //We can  use Proxy to return an alternative prototype, when evaluated through the proxy:
+        const obj = {};
+        const proxy = new Proxy(obj, {
+            getPrototypeOf: function () {
+                return Date.prototype;
+            }
+        })
+        // prints true
+        console.log(proxy instanceof Date);
+        // also prints true
+        console.log(Reflect.getPrototypeOf(proxy) === Date.prototype);
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

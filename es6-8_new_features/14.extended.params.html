@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+/*
+default
+
+You probably know commonly seen pattern in current JavaScript code:
+The logical OR operator (||) always returns the second operand when the first is falsy.
+
+*/
+
+function inc(number, increment) {
+  // set default to 1 if increment not passed
+  // (or passed as undefined)
+  increment = increment || 1;
+  return number + increment;
+}
+console.log(inc(2, 2)); // 4
+console.log(inc(2));    // 3
+
+
+
+
+
+function inc(number, increment = 1) {
+  return number + increment;
+}
+console.log(inc(2, 2)); // 4
+console.log(inc(2));    // 3
+
+
+
+//You can also set default values to parameters that appear before arguments without default values:
+
+function sum(a, b = 2, c) {
+  return a + b + c;
+}
+console.log(sum(1, 5, 10));         // 16 -> b === 5
+console.log(sum(1, undefined, 10)); // 13 -> b as default
+
+
+//You can even execute a function to set default parameter. So it’s not restricted to primitive values.
+
+function getDefaultIncrement() {
+  return 1;
+}
+function inc(number, increment = getDefaultIncrement()) {
+  return number + increment;
+}
+console.log(inc(2, 2)); // 4
+console.log(inc(2));    // 3
+
+
+
+
+
+
+/*-------------------------------------------------------*/
+
+//Rest
+
+/*
+Let’s rewrite sum function to handle all arguments passed to it (without validation — just to be clear). If we want to use ES5, we probably also want to use arguments object.
+
+*/
+
+
+function sum() {
+   var numbers = Array.prototype.slice.call(arguments),
+       result = 0;
+   numbers.forEach(function (number) {
+       result += number;
+   });
+   return result;
+}
+console.log(sum(1));             // 1
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+//But it’s not obvious that the function is capable of handling any parameters. We have to scan a body of the function and find arguments object.
+
+
+
+//sum function can be rewritten using an ES6 syntax:
+function sum(...numbers) {
+  var result = 0;
+  numbers.forEach(function (number) {
+    result += number;
+  });
+  return result;
+}
+console.log(sum(1)); // 1
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+
+
+//Restriction: no other named arguments can follow in the function declaration.
+function sum(...numbers, last) { // causes a syntax error
+  var result = 0;
+  numbers.forEach(function (number) {
+    result += number;
+  });
+  return result;
+}
+
+/*-------------------------------------------------------*/open
+/*
+spread
+
+
+The spread is closely related to rest parameters, because of … (three dots) notation. It allows to split an array to single arguments which are passed to the function as separate arguments.
+
+Let’s define our sum function and pass spread to it:
+
+*/
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+var args = [1, 2, 3];
+console.log(sum(...args)); // 6
+
+
+
+
+    </script>
+</body>
+
+</html>

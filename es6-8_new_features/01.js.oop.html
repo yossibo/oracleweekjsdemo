@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        /*
+        *
+        *
+        *         ES5      
+        *
+        *
+        *
+        */
+        /*************************************************************************/
+
+
+        /*--------------object literal--------------------
+         JavaScript’s object literals - creates directly plain objects
+         */
+        let collage = {
+            name: 'JB',
+            address: 'Tel Aviv',
+            printDetails: function () {
+                console.log(this.name + " " + this.address);
+            }
+        };
+
+        //dot operator  - Accessing Properties via Fixed Keys
+        console.log(collage.name);
+        console.log(collage.address);
+
+        //bracket operator  - Accessing Properties via Computed Keys
+        let tempStr = "address";
+        console.log(collage["name"]);
+        console.log(collage[tempStr]);
+
+
+
+        /*--------------constructor function------------------
+        create a new object with constructors  **/
+        /*
+                function Store()
+                {
+        
+                }
+                var s= new Store() // creates a new empty Object {}
+        
+        */
+
+
+        function Store(name) {
+            this.name = name;
+        }
+
+        Store.prototype.open = function () {
+            console.log(this.name + " is now open");
+        }
+        let s1 = new Store("Nike");
+
+        s1.open();
+
+
+
+        function ShoeStore(name, isMale, isFemale) {
+            Store.call(this, name);
+            this.isFemale = isFemale;
+            this.isMale = isMale;
+        }
+        ShoeStore.prototype = new Store();
+
+        let s2 = new ShoeStore("Adidas", true, true);
+        s2.open();
+
+
+
+        /*
+        *
+        *
+        *         ES6      
+        *
+        *
+        *
+        */
+        /*************************************************************************/
+
+
+        class Market { 
+            constructor(name) {
+                this.name = name
+            }
+            open() {
+                console.log(this.name + " is now open");
+            }
+        }
+
+
+        let m1 = new Market("HaKarmel");
+        m1.open();
+
+
+
+        class SuperMarket extends Market {
+            constructor(name, isOpenLate) {
+                super(name)
+                this.isOpenLate = isOpenLate
+            }
+        }
+
+        let m2 = new SuperMarket("Shufersal", true);
+        m2.open();
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+
+
+
+</body>
+
+</html>

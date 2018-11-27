@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        function sayHi(greeting) {
+            return greeting;
+        }
+        sayHi('Hello!');
+        // 'Hello!'
+
+
+        /*
+        As you can see, the ‘function’ 
+        keyword is no longer necessary.
+        By using the fat arrow syntax ( => ) ES6 knows you are using a function. 
+        There are a few other bits of syntax magic going on here as well.
+        */
+        var sayHi = greeting => greeting
+        sayHi('Hello!');
+        // 'Hello!'
+
+
+
+
+
+        var pets = {
+            names: ['Baron', 'Chief', 'Axel'],
+            owner: 'Jason',
+            description: function () {
+                return this.names.map(function (pet) {
+                    return `${this.owner} knows an awesome dog named ${pet}.`
+                });
+            }
+        };
+        pets.description();
+        
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
